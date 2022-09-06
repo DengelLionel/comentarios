@@ -1,8 +1,13 @@
 import styled from "styled-components"
 export const ContenedorGridStyled=styled.div`
-width:300px;
 margin-bottom:20px;
-display:grid;
-grid-template-columns:repeat(3,auto);
-gap:10px;
+display:inline-flex;
+position:relative;
+bottom:20px;
+left:10px;
+gap:15px;
+@media screen and (min-width:768px){
+    position:relative;
+    bottom:30px;
+}
 `;

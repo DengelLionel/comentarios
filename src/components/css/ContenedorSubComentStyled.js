@@ -1,7 +1,7 @@
 import styled from "styled-components"
-export const ContenedorComentarioStyled=styled.div`
+export const ContenedorSubComentStyled=styled.div`
 padding:20px;
-background:rgb(60,60,60);
+background:#2c0478;
 border-radius:20px 20px 20px 20px;
 margin-bottom:20px;
 `;

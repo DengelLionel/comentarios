@@ -4,7 +4,7 @@ class Join{
     public static function getCommentsAll(){
          try{
             $db=new Connection();
-            $query=$db->prepare("SELECT users.id AS iduser,users.nombres AS nombreuser,comentarios.comentario AS comentariouser,comentarios.fechahora AS fechauser FROM users INNER JOIN comentarios ON users.id=comentarios.id");
+            $query=$db->prepare("SELECT users.id AS iduser,users.nombres AS nombreuser,comentarios.comentario AS comentariouser,comentarios.fechahora AS fechauser,users.perfil AS perfiluser,comentarios.idcomentario AS comentarioid FROM users  INNER JOIN comentarios ON users.id=comentarios.id ORDER BY comentarioid ASC");
             $query->execute();
             $datos=[];
             if($query->rowCount()){
@@ -14,6 +14,8 @@ class Join{
                         "nombre"=>$row->nombreuser,
                         "comentario"=>$row->comentariouser,
                         "fechahora"=>$row->fechauser,
+                        "perfil"=>$row->perfiluser,
+                        "idcomentario"=>$row->comentarioid,
                     ];
                     
                 }

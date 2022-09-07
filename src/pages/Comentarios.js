@@ -5,6 +5,7 @@ import ComentarioFinal from "../components/ComentarioFinal";
 import InputTexto from "../components/InputTexto";
 import BotonSend from "../components/Botonsend";
 import CerrarSesion from "../components/CerrarSesion";
+import DeleteAndEdit from "../components/DeleteAndEdit";
 import Reply from "../components/Reply";
 import SubComentarioFinal from "../components/SubComentarioFinal";
 import { ContenedorSubComentStyled } from "../components/css/ContenedorSubComentStyled";
@@ -21,9 +22,9 @@ import { useNavigate } from "react-router-dom";
 const Comentarios=()=>{
     const [datosComentario,setDatosComentario]=useState()
     const [mostrarReply,setMostrarReply]=useState(false)
-    
+    /* const [deleteC,setDeleteC]=useState(false) */
     const [datosSubComentario,setDatosSubComentario]=useState()
-    const {datoUsuarioActual,comentarioUsuarioActual,actualizado,setActualizado,limpiarInput,setLimpiarInput,obtenerIdComentario,setObtenerIdComentario,actualizadoSubComentario,setActualizadoSubComentario}=useContext(DataContext);
+    const {datoUsuarioActual,comentarioUsuarioActual,actualizado,setActualizado,limpiarInput,setLimpiarInput,obtenerIdComentario,setObtenerIdComentario,actualizadoSubComentario,setActualizadoSubComentario,setEditarComentarioPrincipal,estadoEditarComentarioP,setEstadoEditarComentarioP}=useContext(DataContext);
     
     const dataComentario={
         id:datoUsuarioActual&&datoUsuarioActual.id,
@@ -82,10 +83,7 @@ const Comentarios=()=>{
         }
         console.log("ACTUALIZADOOOO")
     },[actualizado,actualizadoSubComentario])
-    console.log("SUB",datosSubComentario)
-    console.log("El usuario actual es: ",datoUsuarioActual)
-    console.log("Actualizando : ",datosComentario)
-    console.log("Estado actualizado : ",actualizado)
+
     const navigate=useNavigate()
     const handleCerrar=()=>{
         localStorage.clear('useractual')
@@ -98,6 +96,23 @@ const Comentarios=()=>{
     const handleId=(id)=>{
         setObtenerIdComentario(id)
     }
+    const handledDeleteComent=async(id)=>{
+       
+        const url=`${api}comentarios/?id=${id}`
+        
+            const response= await fetch(url,{
+                method:'DELETE',
+                
+            })
+            return await response.text()
+        
+       
+    }
+       const handleEditComentario=(id)=>{
+        setEditarComentarioPrincipal(id)
+        setEstadoEditarComentarioP(!estadoEditarComentarioP)
+       } 
+    
 
     
 return(
@@ -114,9 +129,10 @@ return(
             
                 </ContenedorGridStyled>
            
-            <ComentarioFinal comentario={element.comentario}/>
+            <ComentarioFinal nombre={element.nombre} perfil={element.perfil} iduser={element.id} id={element.idcomentario} comentario={element.comentario}/>
             <div style={{"position":"relative","left":"230px","width":"90px"}}>
-            <Reply handleId={()=>handleId(element.idcomentario)} handleReply={handleReply}/>
+                   
+            
             </div>
             {datosSubComentario?.map(e=>{
                 if(element.idcomentario===e.idcomentarios){
@@ -134,6 +150,9 @@ return(
                 
             })}
             {obtenerIdComentario===element.idcomentario && mostrarReply===true? (<ReplyComentario/>):""}
+            <Reply handleId={()=>handleId(element.idcomentario)} handleReply={handleReply}/>
+            {datoUsuarioActual.id===element.id&&<DeleteAndEdit handleEditComentario={()=>handleEditComentario(element.idcomentario)} handledDeleteComent={()=>handledDeleteComent(element.idcomentario)}
+              />} 
             </ContenedorComentarioStyled>
                )
            }

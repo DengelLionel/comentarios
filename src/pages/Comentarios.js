@@ -8,68 +8,21 @@ import CerrarSesion from "../components/CerrarSesion";
 import DeleteAndEdit from "../components/DeleteAndEdit";
 import Reply from "../components/Reply";
 import SubComentarioFinal from "../components/SubComentarioFinal";
+import { useCommtsCrud, useSubcomentsAll,useHandlesComments} from "../hooks/useCommtsCrudYhandles";
 import { ContenedorSubComentStyled } from "../components/css/ContenedorSubComentStyled";
 import { ContenedorComentarioStyled } from "../components/css/ContenedorComentarioStyled";
 import {HiddenReplyStyled} from "../components/css/ReplyTextStyled";
 import { ContenedorGridStyled } from "../components/css/ContenedorGridStyled";
 import ReplyComentario from "../components/ReplyComentario";
-import { api } from "../api/ApiComentarios";
-import { useEffect, useState,useContext } from "react";
+import { useEffect,useContext } from "react";
 import { DataContext } from "../context/DataContext";
 import {ImgPerfilFoto} from "../components/css/PerfilFotoStyled"
-import moment from "moment";
-import { useNavigate } from "react-router-dom";
 const Comentarios=()=>{
-    const [datosComentario,setDatosComentario]=useState()
-    const [mostrarReply,setMostrarReply]=useState(false)
-    /* const [deleteC,setDeleteC]=useState(false) */
-    const [datosSubComentario,setDatosSubComentario]=useState()
-    const {datoUsuarioActual,comentarioUsuarioActual,actualizado,setActualizado,limpiarInput,setLimpiarInput,obtenerIdComentario,setObtenerIdComentario,actualizadoSubComentario,setActualizadoSubComentario,setEditarComentarioPrincipal,estadoEditarComentarioP,setEstadoEditarComentarioP}=useContext(DataContext);
+    const {datosComentario,RecuperarData,handledDeleteComent,HandleComentarioUsuarioActual}=useCommtsCrud();
+    const {handleCerrar,handleReply,handleId,mostrarReply,handleEditComentario}=useHandlesComments();
+    const {datosSubComentario,RecuperarDataSubComentario}=useSubcomentsAll();
+    const {datoUsuarioActual,actualizado,setActualizado,obtenerIdComentario,actualizadoSubComentario,setActualizadoSubComentario}=useContext(DataContext);
     
-    const dataComentario={
-        id:datoUsuarioActual&&datoUsuarioActual.id,
-        fechahora:moment().format("YYYY-MM-DD HH:mm:ss"),
-        comentario:comentarioUsuarioActual
-    }
-    const RecuperarData=async()=>{
-        const url=`${api}join/`
-        try{
-            let response = await fetch(url,{
-                method:'GET',
-
-            });
-            let result=await response.json();
-            
-             setDatosComentario(result)
-        }catch(error){
-            console.log("ERROR ::: ",error)
-        }
-      
-    }
-
-    const HandleComentarioUsuarioActual= async()=>{
-        setActualizado(!actualizado)
-        setLimpiarInput(!limpiarInput)
-        const urlPost=`${api}comentarios/`
-        const response=await fetch(urlPost,{
-            method:'POST',
-            headers : { 
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-               },
-            body:JSON.stringify(dataComentario)
-        })
-        return await response.text()
-    }
-
-    const RecuperarDataSubComentario=async()=>{
-        const url=`${api}subcomentarios/subcomentariofinal/`
-        const response=await fetch(url,{
-            method:'GET'
-        })
-        const datos=await response.json()
-        setDatosSubComentario(datos)
-    }
     useEffect(()=>{
         RecuperarData()
         RecuperarDataSubComentario()
@@ -81,40 +34,9 @@ const Comentarios=()=>{
             setActualizado(!actualizado)
             RecuperarData()
         }
-        console.log("ACTUALIZADOOOO")
+      
     },[actualizado,actualizadoSubComentario])
-
-    const navigate=useNavigate()
-    const handleCerrar=()=>{
-        localStorage.clear('useractual')
-        return navigate("/")
-    }
-    const handleReply=()=>{
-        setMostrarReply(!mostrarReply)
-
-    }
-    const handleId=(id)=>{
-        setObtenerIdComentario(id)
-    }
-    const handledDeleteComent=async(id)=>{
-       
-        const url=`${api}comentarios/?id=${id}`
-        
-            const response= await fetch(url,{
-                method:'DELETE',
-                
-            })
-            return await response.text()
-        
-       
-    }
-       const handleEditComentario=(id)=>{
-        setEditarComentarioPrincipal(id)
-        setEstadoEditarComentarioP(!estadoEditarComentarioP)
-       } 
-    
-
-    
+  
 return(
         <div style={{"background":"rgba(80,70,65,.5)","padding":"20px"}}>
            {datosComentario?.map(element => {

@@ -1,10 +1,11 @@
-import { Input} from "../components/css/InputsStyled";
+import { Input} from "../components/css/InputStyled";
 import { ButtonStyled } from "../components/css/ButtonStyled";
 import { useContext } from "react";
 import { DataContext } from "../context/DataContext";
+import { useHandlesComments } from "../hooks/useCommtsCrudYhandles";
 const Login=()=>{
-    
-     const {setNombreUsuario,setContraseñaUsuario,contraseñaUsuario,nombreUsuario,HandleIngreso}=useContext(DataContext)
+        const {HandleIngreso}=useHandlesComments()
+     const {setNombreUsuario,setContraseñaUsuario,contraseñaUsuario,nombreUsuario}=useContext(DataContext)
 
     return(
         <>

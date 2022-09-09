@@ -11,3 +11,8 @@ border-radius:20px 20px 20px 20px;
 resize:none;
 outline: none;
 `;
+export const Input=styled.input`
+padding:5px;
+outline:none;
+width:300px;
+`;

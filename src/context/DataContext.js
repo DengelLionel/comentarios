@@ -6,6 +6,9 @@ export const DataProvider=({children})=>{
     const [contraseñaUsuario,setContraseñaUsuario]=useState();
     const [datosUsuario,setDatosUsuario]=useState();
     const [actualizado,setActualizado]=useState(false)
+    const [idSubcomentario,setIdSubcomentario]=useState()
+    const [editarSubComentarioPrincipal,setEditarSubComentarioPrincipal]=useState()
+    const [estadoEditarSubComentarioP,setEstadoEditarSubComentarioP]=useState()
     const [editarComentarioPrincipal,setEditarComentarioPrincipal]=useState()
     const [estadoEditarComentarioP,setEstadoEditarComentarioP]=useState(false)
     const [limpiarInput,setLimpiarInput]=useState(false)
@@ -34,6 +37,9 @@ export const DataProvider=({children})=>{
         deleteComentario,setDeleteComentario,
         editarComentarioPrincipal,setEditarComentarioPrincipal,
         estadoEditarComentarioP,setEstadoEditarComentarioP,
+        idSubcomentario,setIdSubcomentario,
+        editarSubComentarioPrincipal,setEditarSubComentarioPrincipal,
+        estadoEditarSubComentarioP,setEstadoEditarSubComentarioP,
     }
     return(
         <DataContext.Provider value={data}>

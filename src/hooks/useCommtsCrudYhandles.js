@@ -56,7 +56,14 @@ export const useCommtsCrud=()=>{
         })
         return await response.text()
     }
-    return {datosComentario,RecuperarData,handledDeleteComent,HandleComentarioUsuarioActual}
+    const handledDeleteSubComent=async(id)=>{
+        const url=`${api}subcomentarios/?id=${id}`
+        const response= await fetch(url,{
+            method:'DELETE'
+        })
+        return await response.text()
+    }
+    return {datosComentario,RecuperarData,handledDeleteComent,HandleComentarioUsuarioActual,handledDeleteSubComent}
 }
 
 
@@ -74,9 +81,10 @@ export const useSubcomentsAll=()=>{
 }
 
 export const useHandlesComments=()=>{
-    const {setObtenerIdComentario,setEditarComentarioPrincipal,setEstadoEditarComentarioP,estadoEditarComentarioP,setDatosUsuario,setDatoUsuarioActual,nombreUsuario,
-        contraseñaUsuario,datosUsuario}=useContext(DataContext)
+    const {idSubcomentario,setIdSubcomentario,setObtenerIdComentario,setEditarComentarioPrincipal,setEstadoEditarComentarioP,estadoEditarComentarioP,setDatosUsuario,setDatoUsuarioActual,nombreUsuario,estadoEditarSubComentarioP,setEstadoEditarSubComentarioP,
+        editarSubComentarioPrincipal,setEditarSubComentarioPrincipal,  contraseñaUsuario,datosUsuario}=useContext(DataContext)
     const [mostrarReply,setMostrarReply]=useState(false)
+    const [mostrarReplySubcomentario,setMostrarReplySubcomentario]=useState(false)
     const navigate=useNavigate()
     const handleCerrar=()=>{
         localStorage.clear('useractual')
@@ -86,12 +94,22 @@ export const useHandlesComments=()=>{
         setMostrarReply(!mostrarReply)
 
     }
+    const handleReplySubComentario=()=>{
+        setMostrarReplySubcomentario(!mostrarReplySubcomentario)
+    }
     const handleId=(id)=>{
         setObtenerIdComentario(id)
+    }
+    const handleObtenerIdSubComent=(id)=>{
+        setIdSubcomentario(id)
     }
     const handleEditComentario=(id)=>{
         setEditarComentarioPrincipal(id)
         setEstadoEditarComentarioP(!estadoEditarComentarioP)
+    } 
+    const handleEditSubComentario=(id)=>{
+        setEditarSubComentarioPrincipal(id)
+        setEstadoEditarSubComentarioP(!estadoEditarSubComentarioP)
        } 
 
       
@@ -111,6 +129,6 @@ export const useHandlesComments=()=>{
                }
            })
        }   
-    return {handleCerrar,handleReply,handleId,mostrarReply,handleEditComentario,HandleIngreso}
+    return {idSubcomentario,handleObtenerIdSubComent,handleCerrar,handleReply,handleId,mostrarReply,handleEditComentario,HandleIngreso,handleReplySubComentario,mostrarReplySubcomentario,handleEditSubComentario}
 }
 

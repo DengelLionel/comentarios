@@ -18,8 +18,8 @@ import { useEffect,useContext } from "react";
 import { DataContext } from "../context/DataContext";
 import {ImgPerfilFoto} from "../components/css/PerfilFotoStyled"
 const Comentarios=()=>{
-    const {datosComentario,RecuperarData,handledDeleteComent,HandleComentarioUsuarioActual}=useCommtsCrud();
-    const {handleCerrar,handleReply,handleId,mostrarReply,handleEditComentario}=useHandlesComments();
+    const {datosComentario,RecuperarData,handledDeleteComent,HandleComentarioUsuarioActual,handledDeleteSubComent}=useCommtsCrud();
+    const {handleCerrar,handleReply,handleId,mostrarReply,handleEditComentario,idSubcomentario,handleObtenerIdSubComent,handleReplySubComentario,mostrarReplySubcomentario,handleEditSubComentario}=useHandlesComments();
     const {datosSubComentario,RecuperarDataSubComentario}=useSubcomentsAll();
     const {datoUsuarioActual,actualizado,setActualizado,obtenerIdComentario,actualizadoSubComentario,setActualizadoSubComentario}=useContext(DataContext);
     
@@ -36,7 +36,7 @@ const Comentarios=()=>{
         }
       
     },[actualizado,actualizadoSubComentario])
-  
+    console.log("El valor es : ",mostrarReplySubcomentario)
 return(
         <div style={{"background":"rgba(80,70,65,.5)","padding":"20px"}}>
            {datosComentario?.map(element => {
@@ -66,6 +66,12 @@ return(
                          fecha={e.subcomentariofecha}
                          subcomentariofinal={e.subcomentariofinal}
                          />
+                         {idSubcomentario===e.idsubc && mostrarReplySubcomentario===true&&<ReplyComentario/>}
+
+                         <Reply handlesubcomentariosId={()=>handleObtenerIdSubComent(e.idsubc)} handleReplySubComentario={handleReplySubComentario}/>
+                                //ESTE TEMA NOS FALTA
+                         {datoUsuarioActual.id===e.iduser&&<DeleteAndEdit handleEditSubComentario={()=>handleEditSubComentario(e.idsubc)} handledDeleteSubComent={()=>handledDeleteSubComent(e.idsubc)}
+              />} 
                          </ContenedorSubComentStyled>
                     )
                 }

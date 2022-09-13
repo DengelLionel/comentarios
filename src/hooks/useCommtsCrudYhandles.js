@@ -7,7 +7,7 @@ import moment from "moment";
 
 
 export const useCommtsCrud=()=>{
-    const [datosComentario,setDatosComentario]=useState()
+    const {datosComentario,setDatosComentario}=useContext(DataContext)
     const RecuperarData=async()=>{
         const url=`${api}join/`
         try{
@@ -81,8 +81,8 @@ export const useSubcomentsAll=()=>{
 }
 
 export const useHandlesComments=()=>{
-    const {idSubcomentario,setIdSubcomentario,setObtenerIdComentario,setEditarComentarioPrincipal,setEstadoEditarComentarioP,estadoEditarComentarioP,setDatosUsuario,setDatoUsuarioActual,nombreUsuario,estadoEditarSubComentarioP,setEstadoEditarSubComentarioP,
-        editarSubComentarioPrincipal,setEditarSubComentarioPrincipal,  contraseñaUsuario,datosUsuario}=useContext(DataContext)
+    const {idSubcomentario,setIdSubcomentario,setObtenerIdComentario,setEditarComentarioPrincipal,setEstadoEditarComentarioP,estadoEditarComentarioP,setDatosUsuario,setDatoUsuarioActual,nombreUsuario,estadoEditarSubComentario,setEstadoEditarSubComentario,
+        editarSubComentarioPrincipal,setEditarSubComentarioPrincipal,  contraseñaUsuario,datosUsuario,idComentarioParaSubComentario,setIdComentarioParaSubComentario}=useContext(DataContext)
     const [mostrarReply,setMostrarReply]=useState(false)
     const [mostrarReplySubcomentario,setMostrarReplySubcomentario]=useState(false)
     const navigate=useNavigate()
@@ -109,9 +109,11 @@ export const useHandlesComments=()=>{
     } 
     const handleEditSubComentario=(id)=>{
         setEditarSubComentarioPrincipal(id)
-        setEstadoEditarSubComentarioP(!estadoEditarSubComentarioP)
+        setEstadoEditarSubComentario(!estadoEditarSubComentario)
        } 
-
+      const handleIdComentarioParaSubComentario=(id)=>{
+        setIdComentarioParaSubComentario(id)
+      } 
       
        let url=`${api}user/`
        const HandleIngreso=async()=>{
@@ -129,6 +131,6 @@ export const useHandlesComments=()=>{
                }
            })
        }   
-    return {idSubcomentario,handleObtenerIdSubComent,handleCerrar,handleReply,handleId,mostrarReply,handleEditComentario,HandleIngreso,handleReplySubComentario,mostrarReplySubcomentario,handleEditSubComentario}
+    return {idSubcomentario,handleObtenerIdSubComent,handleCerrar,handleReply,handleId,mostrarReply,handleEditComentario,HandleIngreso,handleReplySubComentario,mostrarReplySubcomentario,handleEditSubComentario,handleIdComentarioParaSubComentario}
 }
 

@@ -1,6 +1,8 @@
 <?php
 require_once "../../connection/Connection.php";
+require_once "../../extras/Time_string.php";
 class Join{
+    
     public static function getCommentsAll(){
          try{
             $db=new Connection();
@@ -13,7 +15,7 @@ class Join{
                         "id"=>$row->iduser,
                         "nombre"=>$row->nombreuser,
                         "comentario"=>$row->comentariouser,
-                        "fechahora"=>$row->fechauser,
+                        "fechahora"=>time_string($row->fechauser),
                         "perfil"=>$row->perfiluser,
                         "idcomentario"=>$row->comentarioid,
                     ];

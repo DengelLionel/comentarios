@@ -9,5 +9,14 @@ export const HiddenReplyStyled=styled.div`
 display:none;
 @media screen and (min-width: 768px){
     display:block;
+  
 }
+
 `;
+export const HiddenReply2Styled=styled.div`
+display:block;
+@media screen and (min-width: 640px){
+    display:none;
+  
+}
+`

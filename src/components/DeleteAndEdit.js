@@ -2,7 +2,7 @@ import {ButtonDeleteStyled,ButtonEditStyled} from "./css/ButtonStyled";
 import { useContext } from "react";
 import { DataContext } from "../context/DataContext";
 import { api } from "../api/ApiComentarios";
-const DeleteAndEdit=({handledDeleteComent,handleEditComentario,handledDeleteSubComent,handleEditSubComentario})=>{
+const DeleteAndEdit=({handledDeleteComent,handleEditComentario,handledDeleteSubComent,handleEditSubComentario,handleIdComentarioParaSubComentario})=>{
   
     const {deleteComentario}=useContext(DataContext)
     console.log("EL ID PARA ELIMINAR ES : ",deleteComentario )
@@ -21,7 +21,7 @@ const DeleteAndEdit=({handledDeleteComent,handleEditComentario,handledDeleteSubC
             return handleEditComentario();
         }
         else if(handleEditSubComentario){
-            return handleEditComentario();
+            return handleEditSubComentario(),handleIdComentarioParaSubComentario();
         }
     }
     

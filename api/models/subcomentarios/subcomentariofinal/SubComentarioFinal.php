@@ -1,5 +1,6 @@
 <?php
 require_once "../../../connection/Connection.php";
+require_once "../../../extras/Time_string.php";
 class SubComentarioFinal{
     public static function getAll(){
         $bd=new Connection();
@@ -14,7 +15,7 @@ class SubComentarioFinal{
                     "nombreuser"=>$row->nombreuser,
                     "perfiluser"=>$row->perfiluser,
                     "idcomentarios"=>$row->idcomentarios,
-                    "subcomentariofecha"=>$row->subcomentariofecha,
+                    "subcomentariofecha"=>time_string($row->subcomentariofecha),
                     "idsubc"=>$row->idsubc,
                     "subcomentariofinal"=>$row->subcomentariofinal,
                 ];

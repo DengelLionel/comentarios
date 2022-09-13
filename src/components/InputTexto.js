@@ -11,7 +11,7 @@ const InputTexto=()=>{
         const activarEscritura=()=>{
             setLimpiarInput(false)
         }
-    return(
+    return( 
         <InputStyled value={limpiarInput===true?"":setLimpiarInput(false)} onClick={activarEscritura} onChange={(e)=>setComentarioUsuarioActual(e.target.value)} placeholder="Add a comments..."></InputStyled>
     )
 }

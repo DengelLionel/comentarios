@@ -6,19 +6,22 @@ export const DataProvider=({children})=>{
     const [contraseñaUsuario,setContraseñaUsuario]=useState();
     const [datosUsuario,setDatosUsuario]=useState();
     const [actualizado,setActualizado]=useState(false)
+    const [datosComentario,setDatosComentario]=useState()
     const [idSubcomentario,setIdSubcomentario]=useState()
+    const [idComentarioParaSubComentario,setIdComentarioParaSubComentario]=useState()
     const [editarSubComentarioPrincipal,setEditarSubComentarioPrincipal]=useState()
-    const [estadoEditarSubComentarioP,setEstadoEditarSubComentarioP]=useState()
     const [editarComentarioPrincipal,setEditarComentarioPrincipal]=useState()
     const [estadoEditarComentarioP,setEstadoEditarComentarioP]=useState(false)
     const [limpiarInput,setLimpiarInput]=useState(false)
     const [deleteComentario,setDeleteComentario]=useState()
     const [limpiarSubComentario,setLimpiarSubComentario]=useState(false)
+    const [limpiarSubSubComentario,setLimpiarSubSubComentario]=useState(false)
     const [actualizadoSubComentario,setActualizadoSubComentario]=useState(false)
+    const [actualizadoSubSubComentario,setActualizadoSubSubComentario]=useState(false)
     const [obtenerIdComentario,setObtenerIdComentario]=useState()
     const [datoUsuarioActual,setDatoUsuarioActual]=useState(JSON.parse(localStorage.getItem("useractual")))
     const [comentarioUsuarioActual,setComentarioUsuarioActual]=useState()
-    
+    const [estadoEditarSubComentario,setEstadoEditarSubComentario]=useState(false)
     console.log(nombreUsuario,contraseñaUsuario)
     console.log(datosUsuario)
     const data={
@@ -39,7 +42,11 @@ export const DataProvider=({children})=>{
         estadoEditarComentarioP,setEstadoEditarComentarioP,
         idSubcomentario,setIdSubcomentario,
         editarSubComentarioPrincipal,setEditarSubComentarioPrincipal,
-        estadoEditarSubComentarioP,setEstadoEditarSubComentarioP,
+        estadoEditarSubComentario,setEstadoEditarSubComentario,
+        datosComentario,setDatosComentario,
+        actualizadoSubSubComentario,setActualizadoSubSubComentario,
+        limpiarSubSubComentario,setLimpiarSubSubComentario,
+        idComentarioParaSubComentario,setIdComentarioParaSubComentario,
     }
     return(
         <DataContext.Provider value={data}>

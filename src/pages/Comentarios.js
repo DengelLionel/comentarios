@@ -54,7 +54,7 @@ return(
                 <ContenedorGridStyled>
             <Nombres nombre={element.nombre}/>
             <FechaHora fechahora={element.fechahora}/>
-                <HiddenReplyStyled><Reply/></HiddenReplyStyled>
+                <HiddenReplyStyled><Reply handleId={()=>handleId(element.idcomentario)} handleReply={handleReply}/></HiddenReplyStyled>
             
                 </ContenedorGridStyled>
            

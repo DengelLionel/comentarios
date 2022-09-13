@@ -16,9 +16,11 @@ export const ButtonDeleteStyled=styled.a`
 color:rgb(212, 15, 15);
 font-weight:700;
 margin-right:20px;
+cursor:pointer;
 `;
 export const ButtonEditStyled=styled.a`
 color:rgb(15, 159, 212);
 font-weight:700;
+cursor:pointer;
 `;
 

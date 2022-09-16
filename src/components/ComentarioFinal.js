@@ -7,14 +7,14 @@ import moment from "moment";
 const ComentarioFinal=({comentario,id,nombre,perfil,iduser})=>{
   const {editarComentarioPrincipal,estadoEditarComentarioP,setEstadoEditarComentarioP}=useContext(DataContext)
 
-  const [actualizarComentario,setActualizarComentario]=useState()
+  const [actualizarComentario,setActualizarComentario]=useState(null)
   const [botonUpdate,setBotonUpdate]=useState(false)
   const [valor,setValor]=useState()
   const datosActualizarComentario={
     idcomentario:editarComentarioPrincipal,
     id:iduser,
     fechahora:moment().format("YYYY-MM-DD HH:mm:ss"),
-    comentario:actualizarComentario
+    comentario:actualizarComentario!=null?actualizarComentario:comentario
   }
   console.log(valor&&valor)
   /* const newLine=valor.match(/\n/g).length;
@@ -37,10 +37,10 @@ const ComentarioFinal=({comentario,id,nombre,perfil,iduser})=>{
     return  (
     <>
     <article /* style={QuedaComentario===true?{"display":"none"}:{"display":"block"}} */>
-    <ComentarioFinalBlockStyled estadoActivoOdesactivo={estadoEditarComentarioP}>
+    <ComentarioFinalBlockStyled estadoActivoOdesactivo={estadoEditarComentarioP?false:estadoEditarComentarioP}>
       {comentario}
         </ComentarioFinalBlockStyled>
-
+      {editarComentarioPrincipal===id&&
     <ComentarioFinalStyled
         onChange={(e)=>{setActualizarComentario(e.target.value)}}
          key={id}
@@ -48,6 +48,7 @@ const ComentarioFinal=({comentario,id,nombre,perfil,iduser})=>{
          >
           {comentario}
       </ComentarioFinalStyled> 
+      }
     </article>
 
         

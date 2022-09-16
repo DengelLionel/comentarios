@@ -5,4 +5,7 @@ background:rgb(60,60,60);
 border-radius:20px 20px 20px 20px;
 margin-bottom:20px;
 cursor:default;
+@media screen and (min-width: 768px){
+    width:900px;
+}
 `;

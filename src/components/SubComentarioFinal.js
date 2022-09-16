@@ -13,17 +13,19 @@ import { api } from "../api/ApiComentarios";
 const SubComentarioFinal=({idsubc,iduser,idcoment,perfil,nombre,fecha,subcomentariofinal})=>{
     const {estadoEditarSubComentario,setEstadoEditarSubComentario,editarSubComentarioPrincipal,setEditarSubComentarioPrincipal,idComentarioParaSubComentario}=useContext(DataContext)
     const [botonUpdate,setBotonUpdate]=useState(false)
-    const [actualizarSubComentario,setActualizarSubComentario]=useState()
+    const [actualizarSubComentario,setActualizarSubComentario]=useState(null)
+   
     const datosActualizarComentario={
         idsubcomentarios:editarSubComentarioPrincipal,
         idcomentario:idComentarioParaSubComentario,
         id:iduser,
-        subcomentario:actualizarSubComentario,
+        subcomentario:actualizarSubComentario!=null?actualizarSubComentario:subcomentariofinal,
         fechahora:moment().format("YYYY-MM-DD HH:mm:ss")
       }
     const ActualizarSubComentario=async()=>{
         setBotonUpdate(true)
         setEstadoEditarSubComentario(false)
+        console.log("el sub coment ",actualizarSubComentario)
         const url=`${api}subcomentarios/`
         const response=await fetch(url,{
           method:'PUT',
@@ -35,7 +37,7 @@ const SubComentarioFinal=({idsubc,iduser,idcoment,perfil,nombre,fecha,subcomenta
             <article>
              <ImgPerfilFoto alt={perfil} src={`/img/${perfil}`}/>
             <ContenedorGridStyled>
-            <NombreStyled>{nombre}</NombreStyled>
+            <NombreStyled>{nombre}</NombreStyled> 
             <FechaHoraStyled>{fecha}</FechaHoraStyled>
             </ContenedorGridStyled>
 
@@ -53,7 +55,7 @@ const SubComentarioFinal=({idsubc,iduser,idcoment,perfil,nombre,fecha,subcomenta
                 {subcomentariofinal}
                 </SubComentarioFinalStyled>
               }  
-                {editarSubComentarioPrincipal&&editarSubComentarioPrincipal===idsubc&&estadoEditarSubComentario===true?(<ButtonStyled onClick={ActualizarSubComentario}>UPDATE</ButtonStyled>):""}
+                {editarSubComentarioPrincipal&&editarSubComentarioPrincipal===idsubc&&estadoEditarSubComentario===true&&<ButtonStyled onClick={ActualizarSubComentario}>UPDATE</ButtonStyled>}
             </article>
            
     

@@ -11,4 +11,8 @@ border-radius:100%;
     width:80px;
     height:80px;
 }
+@media screen and (min-width: 1280px){
+    width:50px;
+    height:50px;
+}
 `;

@@ -10,9 +10,16 @@ color:#fafafa;
 border-radius:20px 20px 20px 20px;
 resize:none;
 outline: none;
+@media screen and (min-width: 768px){
+    width:500px;
+    }
+@media screen and (min-width: 1280px){
+        width:650px;
+        }
 `;
 export const Input=styled.input`
 padding:5px;
 outline:none;
 width:300px;
+
 `;

@@ -4,7 +4,7 @@ import FechaHora from "../components/Fechahora"
 import ComentarioFinal from "../components/ComentarioFinal";
 import InputTexto from "../components/InputTexto";
 import BotonSend from "../components/Botonsend";
-import CerrarSesion from "../components/CerrarSesion";
+import Modal from "../components/Modal";
 import DeleteAndEdit from "../components/DeleteAndEdit";
 import Reply from "../components/Reply";
 import SubComentarioFinal from "../components/SubComentarioFinal";
@@ -19,12 +19,14 @@ import { useEffect,useContext } from "react";
 import { DataContext } from "../context/DataContext";
 import {ImgPerfilFoto} from "../components/css/PerfilFotoStyled"
 import { useState } from "react";
+import BotonEliminarCancelar from "../components/ContenidoEliminarYcancelar";
+
 const Comentarios=()=>{
     const [idComentarioParaInterfaz,setIdComentarioParaInterfaz]=useState([])
     const {RecuperarData,handledDeleteComent,HandleComentarioUsuarioActual,handledDeleteSubComent}=useCommtsCrud();
     const {handleCerrar,handleReply,handleId,mostrarReply,handleEditComentario,idSubcomentario,handleObtenerIdSubComent,handleReplySubComentario,mostrarReplySubcomentario,handleEditSubComentario,handleIdComentarioParaSubComentario}=useHandlesComments();
     const {datosSubComentario,RecuperarDataSubComentario}=useSubcomentsAll();
-    const {datoUsuarioActual,actualizado,setActualizado,obtenerIdComentario,actualizadoSubComentario,setActualizadoSubComentario,datosComentario,actualizadoSubSubComentario,setActualizadoSubSubComentario,setLimpiarSubSubComentario,idComentarioParaSubComentario,editarSubComentarioPrincipal}=useContext(DataContext);
+    const {datoUsuarioActual,actualizado,setActualizado,obtenerIdComentario,actualizadoSubComentario,setActualizadoSubComentario,datosComentario,actualizadoSubSubComentario,setActualizadoSubSubComentario,setLimpiarSubSubComentario,idComentarioParaSubComentario,editarSubComentarioPrincipal,modalAccion,setModalAccion,modalAccionSubComentario,setModalAccionSubComentario}=useContext(DataContext);
     
     useEffect(()=>{
         RecuperarData()
@@ -33,18 +35,25 @@ const Comentarios=()=>{
             setActualizadoSubComentario(!actualizadoSubComentario)
             RecuperarDataSubComentario()
         }
-         if(actualizado===true){
+        else if(actualizado===true){
             setActualizado(!actualizado)
             RecuperarData()
         }
-        if(actualizadoSubSubComentario===true){
+        else if(actualizadoSubSubComentario===true){
             setActualizadoSubSubComentario(!actualizadoSubSubComentario)
             RecuperarDataSubComentario()
 
         }
+        else if(modalAccion===false){
+            RecuperarData()
+        }
+        else if(modalAccionSubComentario===false){
+            RecuperarData()
+        }
+
 
       
-    },[actualizado,actualizadoSubComentario,actualizadoSubSubComentario])
+    },[actualizado,actualizadoSubComentario,actualizadoSubSubComentario,modalAccion,modalAccionSubComentario])
     console.log("El valor es : ",mostrarReplySubcomentario)
     console.log("Los idcomentarios es ",idComentarioParaInterfaz&&idComentarioParaInterfaz)
 return(
@@ -70,8 +79,13 @@ return(
               handleReply={handleReply}/>
             </HiddenReply2Styled>
             {datoUsuarioActual.id===comentarioPrincipal.id&&<DeleteAndEdit
-             handleEditComentario={()=>handleEditComentario(comentarioPrincipal.idcomentario)} handledDeleteComent={()=>handledDeleteComent(comentarioPrincipal.idcomentario)}
-              />} 
+             handleEditComentario={()=>handleEditComentario(comentarioPrincipal.idcomentario)}
+             handledSelectDeleteComentario={()=>setModalAccion(true)}
+              />} { modalAccion===true&&<Modal>
+                {datoUsuarioActual.id===comentarioPrincipal.id&&<BotonEliminarCancelar
+            handledDeleteComent={()=>handledDeleteComent(comentarioPrincipal.idcomentario)}
+              />}
+                </Modal>}
             </ContenedorComentarioStyled>
             {/* INICIA SUBCOMENTARIO */}
             {datosSubComentario?.map(e=>{
@@ -98,10 +112,15 @@ return(
                        
                             
                          {
-                         datoUsuarioActual.id===e.iduser&&<DeleteAndEdit handleEditSubComentario={()=>handleEditSubComentario(e.idsubc)} handledDeleteSubComent={()=>handledDeleteSubComent(e.idsubc)}
-                         handleIdComentarioParaSubComentario={()=>handleIdComentarioParaSubComentario(comentarioPrincipal.idcomentario)}
+                         datoUsuarioActual.id===e.iduser&&<DeleteAndEdit handleEditSubComentario={()=>handleEditSubComentario(e.idsubc)} handledSelectDeleteSubComentario={()=>setModalAccionSubComentario(true)}
+                         handleIdComentarioParaSubComentario={()=>handleIdComentarioParaSubComentario(comentarioPrincipal.idcomentario)} 
                          
               />} 
+              { modalAccionSubComentario===true&&<Modal>
+                {datoUsuarioActual.id===e.iduser&&<BotonEliminarCancelar
+           handledDeleteSubComent={()=>handledDeleteSubComent(e.idsubc)}
+              />}
+                </Modal>}
                          </ContenedorSubComentStyled>
                     )
                 }

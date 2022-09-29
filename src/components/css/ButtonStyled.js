@@ -22,6 +22,7 @@ height:50px;
 }
 
 
+
 `;
 export const ButtonDeleteStyled=styled.a`
 color:rgb(212, 15, 15);
@@ -40,4 +41,19 @@ cursor:pointer;
     font-size:1.2rem;
 }
 `;
-
+export const BotonEliminarDefinitivo=styled.button`
+background-color:#E22B2B;
+color:#fafafa;
+border-radius:10px 10px 10px 10px;
+padding:10px;
+font-weight:bold;
+border-color:transparent;
+`
+export const BotonCancelar=styled.button`
+background-color:#2B3539;
+color:#fafafa;
+border-radius:10px 10px 10px 10px;
+padding:10px;
+font-weight:bold;
+border-color:transparent;
+`

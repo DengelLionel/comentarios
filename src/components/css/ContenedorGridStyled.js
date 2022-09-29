@@ -23,3 +23,10 @@ export const ContenedorAddComentarioStyled=styled.article`
     gap:20px;
 }
 `
+export const ContenedorBotonesEliminarCancelar=styled.article`
+width:100%;
+display:flex;
+justify-content:center;
+align-items:center;
+gap:15px;
+`

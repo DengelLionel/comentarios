@@ -9,3 +9,13 @@ margin:0;
     margin:0;
 }
 `;
+export const TituloModalEliminar=styled.p`
+color:rgb(0,0,1);
+font-size:1.5em;
+font-weight:700;
+`
+export const PalabrasModalEliminar=styled.p`
+color:rgb(0,0,1);
+font-size:1em;
+font-weight:400;
+`

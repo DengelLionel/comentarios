@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { DataContext } from "../context/DataContext";
 import { useNavigate } from "react-router-dom";
 import moment from "moment";
-
+import Modal from "../components/Modal";
 
 export const useCommtsCrud=()=>{
     const {datosComentario,setDatosComentario}=useContext(DataContext)
@@ -26,7 +26,7 @@ export const useCommtsCrud=()=>{
 
    
     const handledDeleteComent=async(id)=>{
-       
+
         const url=`${api}comentarios/?id=${id}`
         
             const response= await fetch(url,{
@@ -82,7 +82,7 @@ export const useSubcomentsAll=()=>{
 
 export const useHandlesComments=()=>{
     const {idSubcomentario,setIdSubcomentario,setObtenerIdComentario,setEditarComentarioPrincipal,setEstadoEditarComentarioP,estadoEditarComentarioP,setDatosUsuario,setDatoUsuarioActual,nombreUsuario,estadoEditarSubComentario,setEstadoEditarSubComentario,
-        editarSubComentarioPrincipal,setEditarSubComentarioPrincipal,  contraseñaUsuario,datosUsuario,idComentarioParaSubComentario,setIdComentarioParaSubComentario}=useContext(DataContext)
+        editarSubComentarioPrincipal,setEditarSubComentarioPrincipal,  contraseñaUsuario,datosUsuario,idComentarioParaSubComentario,setIdComentarioParaSubComentario,modalAccion}=useContext(DataContext)
     const [mostrarReply,setMostrarReply]=useState(false)
     const [mostrarReplySubcomentario,setMostrarReplySubcomentario]=useState(false)
     const navigate=useNavigate()
@@ -114,6 +114,9 @@ export const useHandlesComments=()=>{
       const handleIdComentarioParaSubComentario=(id)=>{
         setIdComentarioParaSubComentario(id)
       } 
+      const handleMostrarModal=()=>{
+       
+      }
       
        let url=`${api}user/`
        const HandleIngreso=async()=>{
@@ -131,6 +134,6 @@ export const useHandlesComments=()=>{
                }
            })
        }   
-    return {idSubcomentario,handleObtenerIdSubComent,handleCerrar,handleReply,handleId,mostrarReply,handleEditComentario,HandleIngreso,handleReplySubComentario,mostrarReplySubcomentario,handleEditSubComentario,handleIdComentarioParaSubComentario}
+    return {idSubcomentario,handleObtenerIdSubComent,handleCerrar,handleReply,handleId,mostrarReply,handleEditComentario,HandleIngreso,handleReplySubComentario,mostrarReplySubcomentario,handleEditSubComentario,handleIdComentarioParaSubComentario,handleMostrarModal}
 }
 

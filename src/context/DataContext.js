@@ -22,6 +22,8 @@ export const DataProvider=({children})=>{
     const [datoUsuarioActual,setDatoUsuarioActual]=useState(JSON.parse(localStorage.getItem("useractual")))
     const [comentarioUsuarioActual,setComentarioUsuarioActual]=useState()
     const [estadoEditarSubComentario,setEstadoEditarSubComentario]=useState(false)
+    const [modalAccion,setModalAccion]=useState(false)
+    const [modalAccionSubComentario,setModalAccionSubComentario]=useState(false)
     console.log(nombreUsuario,contraseñaUsuario)
     console.log(datosUsuario)
     const data={
@@ -47,6 +49,8 @@ export const DataProvider=({children})=>{
         actualizadoSubSubComentario,setActualizadoSubSubComentario,
         limpiarSubSubComentario,setLimpiarSubSubComentario,
         idComentarioParaSubComentario,setIdComentarioParaSubComentario,
+        modalAccion,setModalAccion,
+        modalAccionSubComentario,setModalAccionSubComentario
     }
     return(
         <DataContext.Provider value={data}>

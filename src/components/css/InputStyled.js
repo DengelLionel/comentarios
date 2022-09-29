@@ -14,7 +14,8 @@ outline: none;
     width:500px;
     }
 @media screen and (min-width: 1280px){
-        width:650px;
+        width:500px;
+        
         }
 `;
 export const Input=styled.input`

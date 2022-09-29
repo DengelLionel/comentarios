@@ -1,10 +1,7 @@
 import styled from "styled-components";
 export const ButtonStyled=styled.button`
 border-radius:20px 20px 20px 20px;
-margin-top:20px;
-
-background-color:rgb(42, 6, 120);
-padding:8px;
+background-color:rgb(0, 100, 120);
 color:#fafafa;
 border-color:transparent;
 cursor:pointer;
@@ -15,8 +12,10 @@ height:50px;
 @media screen and (min-width:768px){
     background-color:rgb(0, 100, 120);
     margin-right:20px;
+    cursor:pointer;
     &:hover{
         background-color:rgb(0,0,30);
+        cursor:pointer;
     }
 
 }

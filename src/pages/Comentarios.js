@@ -12,7 +12,7 @@ import { useCommtsCrud, useSubcomentsAll,useHandlesComments} from "../hooks/useC
 import { ContenedorSubComentStyled } from "../components/css/ContenedorSubComentStyled";
 import { ContenedorComentarioStyled } from "../components/css/ContenedorComentarioStyled";
 import {HiddenReplyStyled,HiddenReply2Styled} from "../components/css/ReplyTextStyled";
-import { ContenedorGridStyled,ContenedorAddComentarioStyled } from "../components/css/ContenedorGridStyled";
+import { ContenedorGridStyled,ContenedorAddComentarioStyled, ContenedorImagenEscritorio, ContenedorImagenMobil } from "../components/css/ContenedorGridStyled";
 import ReplyComentario from "../components/ReplyComentario";
 import ReplySubComentario from "../components/ReplySubComentario";
 import { useEffect,useContext } from "react";
@@ -57,7 +57,7 @@ const Comentarios=()=>{
     console.log("El valor es : ",mostrarReplySubcomentario)
     console.log("Los idcomentarios es ",idComentarioParaInterfaz&&idComentarioParaInterfaz)
 return(
-        <div style={{"background":"rgba(80,70,65,.5)","padding":"20px"}}>
+        <section style={{"background":"rgba(80,70,65,.5)","padding":"20px"}}>
            {datosComentario?.map(comentarioPrincipal => {
                return(
                 <>
@@ -134,13 +134,24 @@ return(
 
              
              <ContenedorAddComentarioStyled >
-             <ImgPerfilFoto style={{"margin-top":"10px"}} alt={datoUsuarioActual&&datoUsuarioActual.nombre} src={`/img/${datoUsuarioActual&&datoUsuarioActual.perfil}`}/>
+                <ContenedorImagenEscritorio >
+             <ImgPerfilFoto  alt={datoUsuarioActual&&datoUsuarioActual.nombre} src={`/img/${datoUsuarioActual&&datoUsuarioActual.perfil}`}/>
+             </ContenedorImagenEscritorio>
              <InputTexto/>
-             {/* <CerrarSesion handleCerrar={handleCerrar}/> */}
-             <BotonSend handle={HandleComentarioUsuarioActual}/>
+                
+                <ContenedorImagenMobil>
+                <ImgPerfilFoto  alt={datoUsuarioActual&&datoUsuarioActual.nombre} src={`/img/${datoUsuarioActual&&datoUsuarioActual.perfil}`}/>
+                <BotonSend handle={HandleComentarioUsuarioActual}/>
+                </ContenedorImagenMobil>
+                <ContenedorImagenEscritorio >
+                <BotonSend handle={HandleComentarioUsuarioActual}/>
+                </ContenedorImagenEscritorio>
+
+                
+           
              </ContenedorAddComentarioStyled>
                 
-        </div>
+        </section>
         
        
 
